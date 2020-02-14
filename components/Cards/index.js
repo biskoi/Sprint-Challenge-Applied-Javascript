@@ -17,3 +17,49 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
+
+function cardMaker(attr) {
+    let card = document.createElement('div');
+    let cardHeadline = document.createElement('div');
+    let cardAuthor = document.createElement('div');
+    let cardImgParent = document.createElement('div');
+    let cardImg = document.createElement('img');
+    let cardAuthorName = document.createElement('span');
+
+    card.classList.add('card');
+    cardHeadline.classList.add('headline');
+    cardAuthor.classList.add('author');
+    cardImgParent.classList.add('img-container');
+
+    cardHeadline.textContent = attr.headline;
+    cardImg.src = attr.authorPhoto;
+    cardAuthorName.textContent = `By: ${attr.authorName}`;
+
+    card.append(cardHeadline, cardAuthor);
+    cardAuthor.append(cardImgParent, cardAuthorName);
+    cardImgParent.append(cardImg);
+
+    return card;
+
+}
+
+let cardParent = document.querySelector('.cards-container');
+
+let sample = {
+    authorName: 'biskoi',
+    authorPhoto: './assets/fido.jpg',
+    headline: 'lambda student celebrates 23rd year on earth with sprint'
+}
+
+cardParent.append(cardMaker(sample));
+
+axios.get('https://lambda-times-backend.herokuapp.com/articles').then(reply => {
+    let entries = Object.entries(reply.data.articles);
+    entries.forEach(item => {
+        let articles = Object.entries(item);
+        articles[1][1].forEach(item => {
+            cardParent.append(cardMaker(item))
+        });
+    })
+})
+
