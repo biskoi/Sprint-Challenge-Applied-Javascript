@@ -57,6 +57,7 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles').then(reply => {
     let entries = Object.entries(reply.data.articles);
     entries.forEach(item => {
         let articles = Object.entries(item);
+        console.log(articles);
         articles[1][1].forEach(item => {
             cardParent.append(cardMaker(item))
         });
