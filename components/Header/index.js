@@ -30,7 +30,7 @@ function headerMaker(attr) {
 }
 
 let defaultHead = {
-    date: 'MARCH 28, 2019',
+    date: 'SMARCH 28, 2019',
     header: 'Lambda Times',
     temp: '98°'
 }
